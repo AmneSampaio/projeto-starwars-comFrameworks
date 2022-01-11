@@ -2,14 +2,11 @@ package com.cinema.starwars.services;
 
 import com.cinema.starwars.controllers.VehicleController;
 import com.cinema.starwars.models.Garage;
-import com.cinema.starwars.models.LineUp;
+import com.cinema.starwars.models.StarwarsApiResult;
 import com.cinema.starwars.models.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class VehicleService {
@@ -23,19 +20,16 @@ public class VehicleService {
 
     public Garage getEntireGarage() {
         Garage biggerGarage = new Garage();
-        Garage garage = restTemplate.getForObject(url, Garage.class);
-        biggerGarage.appendResults(garage.getResults());
-        LineUp eachPage = restTemplate.getForObject(url, LineUp.class);
-        String nextPage = eachPage.getNextPage().toString();
-        //List<String> allPages = new ArrayList<>();
+        StarwarsApiResult apiResult = restTemplate.getForObject(url, StarwarsApiResult.class);
+        biggerGarage.appendResults(apiResult.getResults());
 
-        while (!nextPage.isEmpty()) {
-            String newUrl = url + nextPage;
-            garage = restTemplate.getForObject(newUrl, Garage.class);
-            eachPage = restTemplate.getForObject(newUrl, LineUp.class);
-            nextPage = eachPage.getNextPage().toString();
-            if (!nextPage.isEmpty()) {
-                biggerGarage.appendResults(garage.getResults());
+        String nextPage = apiResult.getNext();
+
+        while (nextPage != null) {
+            apiResult = restTemplate.getForObject(nextPage, StarwarsApiResult.class);
+            nextPage = apiResult.getNext();
+            if (nextPage != null) {
+                biggerGarage.appendResults(apiResult.getResults());
             }
         }
 
