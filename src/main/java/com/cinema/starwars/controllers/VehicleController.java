@@ -4,10 +4,9 @@ import com.cinema.starwars.models.Garage;
 import com.cinema.starwars.models.Vehicle;
 import com.cinema.starwars.services.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/starwars")
@@ -26,5 +25,12 @@ public class VehicleController {
 
         return vehicleService.getOneVehicleFromGarage(id);
     }
+
+    // TODO endpoint que mostra os ids disponiveis
+    /*public List<Strings> getAvailableIds() {
+
+
+    }*/
+
 
 }
