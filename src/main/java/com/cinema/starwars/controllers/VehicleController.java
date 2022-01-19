@@ -26,11 +26,5 @@ public class VehicleController {
         return vehicleService.getOneVehicleFromGarage(id);
     }
 
-    // TODO endpoint que mostra os ids disponiveis
-    /*public List<Strings> getAvailableIds() {
-
-
-    }*/
-
 
 }
