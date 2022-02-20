@@ -37,11 +37,8 @@ public class VehicleService {
 
     }
 
-    public Vehicle getOneVehicleFromGarage(int id) {
+    public Vehicle getOneVehicleFromGarage(Long id) {
         return restTemplate.getForObject(url + id, Vehicle.class);
     }
-
-
-
 
 }
