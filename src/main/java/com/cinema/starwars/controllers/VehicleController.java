@@ -22,7 +22,7 @@ public class VehicleController {
     }
 
     @GetMapping("one/{id}")
-    public Vehicle getOneVehicleFromGarage(@PathVariable int id){
+    public Vehicle getOneVehicleFromGarage(@PathVariable Long id){
 
         return vehicleService.getOneVehicleFromGarage(id);
     }

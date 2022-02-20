@@ -1,13 +1,19 @@
-package com.cinema.starwars.models;
+package com.cinema.starwars.models.dto;
 
-import javax.persistence.*;
+import com.cinema.starwars.models.Toss;
+import com.cinema.starwars.models.User;
+import com.cinema.starwars.models.Vehicle;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Auction {
+public class AuctionDTO {
 
     @Id
     @GeneratedValue
@@ -28,10 +34,10 @@ public class Auction {
     @OneToMany
     private List<Toss> tosses = new ArrayList<>();
 
-    public Auction() {
+    public AuctionDTO() {
     }
 
-    public Auction(LocalDateTime start, LocalDateTime finish, BigDecimal startingPrice, Vehicle vehicle) {
+    public AuctionDTO(LocalDateTime start, LocalDateTime finish, BigDecimal startingPrice, Vehicle vehicle) {
         this.start = start;
         this.finish = finish;
         this.startingPrice = startingPrice;
@@ -86,16 +92,4 @@ public class Auction {
         this.tosses = tosses;
     }
 
-    @Override
-    public String toString() {
-        return "Auction{" +
-                "id=" + id +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", startingPrice=" + startingPrice +
-                ", vehicle=" + vehicle +
-                ", user=" + user +
-                ", tosses=" + tosses +
-                '}';
-    }
 }
